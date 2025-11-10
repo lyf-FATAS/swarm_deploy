@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>drone_control</name>
+  <version>0.1.0</version>
+  <description>TensorRT runner demo for ROS1 on NVIDIA Jetson.</description>
+
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>interactive_markers</depend>
+  <depend>visualization_msgs</depend>
+  <depend>quadrotor_msgs</depend>
+
+  <build_depend>libnvinfer-dev</build_depend>
+  <build_depend>libnvinfer-plugin-dev</build_depend>
+  <build_depend>libnvonnxparsers-dev</build_depend>
+  <exec_depend>libnvinfer-dev</exec_depend>
+  <exec_depend>libnvinfer-plugin-dev</exec_depend>
+  <exec_depend>libnvonnxparsers-dev</exec_depend>
+
+  <export><build_type>catkin</build_type></export>
+</package>

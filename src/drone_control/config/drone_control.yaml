@@ -1,0 +1,30 @@
+# 无人机策略控制节点（私有参数，等价于 ~param）
+# 话题名也放这里，便于一处改全局
+
+# 控制与约束
+infer_dt: 0.05             # 推理周期 [s]
+control_dt: 0.01           # 控制周期 [s]
+
+action_clip: 1.0
+max_vel: 1.5               # 速度上限（模长）
+max_acc: 6.0               # 加速度上限（模长）
+
+# 观测尺寸
+drones_num: 5              # 总机数（含自身）
+virtual_obstacles_num: 3   # 虚拟观测数
+obs_history_len: 10
+
+# 调试与推理
+print_debug: true
+warmup_iters: 200
+model_path: /home/nv/SWARM-Physical/src/drone_control/model/acc_8_12_ideal.engine
+
+# 话题（可以按需改名）
+target_topic:  target_position       # geometry_msgs/Point
+velocity_topic: self_velocity        # geometry_msgs/Vector3
+others_topic:  other_drones_obs      # std_msgs/Float32MultiArray，长度=4*(drones_num-1)
+
+accel_topic:   cmd_accel             # geometry_msgs/Accel （发布）
+vel_topic:     cmd_vel               # geometry_msgs/Twist（发布）
+pos_topic:     cmd_pos               # geometry_msgs/Point （发布）
+action_topic:  policy_action         # std_msgs/Float32MultiArray（发布，原始动作）

@@ -1,0 +1,28 @@
+<launch>
+  <!-- 可选参数 -->
+  <!-- <arg name="ns"         default="drone1"/> -->
+  <arg name="ns"         default="drone_control"/>
+  <arg name="node_name"  default="drone_control_node"/>
+  <arg name="config"     default="$(find drone_control)/config/drone_control.yaml"/>
+  <arg name="use_sim_time" default="false"/>
+
+  <group ns="$(arg ns)">
+    <param name="use_sim_time" value="$(arg use_sim_time)"/>
+
+    <!-- 启动节点；把 YAML 加到该节点的私有命名空间 (~) -->
+    <node pkg="drone_control" type="drone_control_node" name="$(arg node_name)" output="screen">
+      <rosparam command="load" file="$(arg config)"/>
+
+      <!-- 如果想临时覆盖 YAML 里的某些参数，可以额外写 param：
+      <param name="model_path" value="/data/models/acc_8_3_rand.engine"/>
+      <param name="control_dt" value="0.02"/>
+      -->
+
+      <!-- 需要用 remap 直接改话题名也行（注意：这是话题重映射，独立于上面的参数）：
+      <remap from="target_position" to="/planner/target"/>
+      <remap from="self_velocity"  to="/state/velocity"/>
+      <remap from="cmd_vel"        to="/mavros/setpoint_velocity/cmd_vel"/>
+      -->
+    </node>
+  </group>
+</launch>
