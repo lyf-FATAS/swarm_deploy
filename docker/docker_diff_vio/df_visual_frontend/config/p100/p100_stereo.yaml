@@ -1,0 +1,33 @@
+%YAML:1.0
+---
+
+camera_topic: ["/camera/infra1/image_rect_raw", "/camera/infra2/image_rect_raw"]  # camera topic names
+camera_info:  ["cam0_pinhole.yaml",   "cam1_pinhole.yaml"  ]  # camera info file names
+camera_mask:  []
+
+# frontend configuration
+tracking_type: "general_stereo"       # tracking type: ["virtual_stereo", "general_stereo", "EIS_fisheye"]
+max_feature_per_frame: 150            # max feature number in feature tracking
+min_feature_distance: 30              # min distance between two features
+inv_flow_dis_thresh: 0.5              # inverse flow distance threshold
+quality_level: 0.01                   # quality level for Shi-Tomasi corner detection
+track_show_status: [1, 1]          # tracking results visualization [enable/disable, draw features, draw ids]
+always_keyframe: 1                 # always keyframe: [0, 1]
+
+body_T_cam0: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: d
+   data: [0.03359628806173869, -0.0008878701270930532, 0.9994350909964625, 0.04122579517452919,
+          -0.9993628417061561, -0.012086543399733057, 0.03358312203533797, 0.054234566495176814,
+          0.012049898151715217, -0.9999265608809883, -0.0012933674070058742, 0.04134793348902687,
+          0.0, 0.0, 0.0, 1.0]
+
+body_T_cam1: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: d
+   data: [0.03373839958888528, 0.00032956697437299147, 0.9994306438061573, 0.04321589934451833,
+          -0.9993554478072667, -0.012260008955869402, 0.03373990394680011, 0.004260419010047777,
+          0.012264148201893218, -0.9999247889546548, -8.427852985933423e-05, 0.04181112367961681,
+          0.0, 0.0, 0.0, 1.0]

@@ -1,0 +1,10 @@
+<!-- Launch File for running fusion_odometry. -->
+<launch>
+    <!-- fusion odometry node -->
+    <arg name="fusion_odometry_config_file" default="$(find fusion_odometry)/config/seeker_v1.yaml"/>
+    <node pkg="fusion_odometry" type="run_on_ros" name="fusion_odometry_on_ros" clear_params="true" output="screen" args="$(arg fusion_odometry_config_file)"/>
+
+    <!-- visual frontend node -->
+    <arg name="visual_frontend_config_file" default="$(find df_visual_frontend)/config/f4/f4.yaml"/>
+    <node pkg="df_visual_frontend" type="test_track_pipeline" name="df_visual_frontend_node" clear_params="true" output="screen" args="$(arg visual_frontend_config_file)"/>
+</launch>

@@ -1,0 +1,4 @@
+<!-- Launch File for running rviz. -->
+<launch>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find fusion_odometry)/config/rviz.rviz" />
+</launch>

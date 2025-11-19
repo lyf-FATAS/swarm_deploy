@@ -1,0 +1,75 @@
+%YAML:1.0
+---
+
+imu_topic: ["/livox/imu"]
+visual_topic: ["/visual_track_result"]
+lidar_topic: ["/livox/lidar"]
+
+fusion:
+    p_ib: [0, 0, 0]
+    q_ib: [1, 0, 0, 0]
+
+imu_manager:
+    enable_initialize_when_stationary: 1
+    lazy_point_time_s: 0.2
+    stationary_detect:
+        accel_peak_peak: 0.25
+        gyro_peak_peak: 0.02
+    over_range_detect:
+        accel_norm: 30.0
+        gyro_norm: 10.0
+    imu_model:
+        accel_noise_sigma: 0.1
+        gyro_noise_sigma: 0.006
+        accel_random_walk_sigma: 0.06
+        gyro_random_walk_sigma: 0.0004
+    state_init_sigma:
+        p_wi: 1e-2
+        q_wi: 1e-3
+        v_wi: 1e-2
+        bias_a: 1e-2
+        bias_g: 5e-4
+    updaters:
+        gravity:
+            enable_update: 1
+            default_sigma: 10.0
+        zero_velocity:
+            enable_update: 1
+            default_sigma: 0.01
+        zero_angular_velocity:
+            enable_update: 1
+            default_sigma: 0.002
+
+visual_manager:
+    enable: 0
+
+lidar_manager:
+    enable: 1
+    fix_p_il: 1
+    lidar_scan_radius: 30.0
+    voxels:
+        downsample_length: 0.2
+        downsample_radius: 50.0
+    max_number_of_points_to_use: 1000
+    min_number_of_points_to_use: 100
+    state_init_sigma:
+        p_il: 1e-7
+        q_il: 1e-7
+    updaters:
+        scan:
+            enable_update: 1
+            default_sigma: 0.03
+    # Livox mid-360
+    p_il: [-0.01100, -0.02390, 0.04412]
+    q_il: [1, 0, 0, 0]
+    # C5-250801
+    # p_il: [-0.025, -0.010, 0.090]
+    # q_il: [0.701057, 0.092296, 0.0922959, 0.701057]
+    # C5-2508001
+    # p_il: [-0.025, -0.010, 0.080]
+    # q_il: [0.701057, 0.092296, 0.0922959, 0.701057]
+    voxel_map:
+        voxel_size: 0.5
+        max_number_of_points_to_append_once: 10000
+    debug:
+        draw_all_plane_points: 0

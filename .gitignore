@@ -1,0 +1,20 @@
+.vscode/
+
+build/
+devel/
+.catkin_workspace
+src/CMakeLists.txt
+
+env_swarm/
+
+converted_config/
+
+*.bag
+
+# VIO configs
+docker/docker_diff_vio/df_visual_frontend/config/f4_v2/cam0_fisheye.yaml
+docker/docker_diff_vio/df_visual_frontend/config/f4_v2/cam1_fisheye.yaml
+docker/docker_diff_vio/df_visual_frontend/config/f4_v2/cam2_fisheye.yaml
+docker/docker_diff_vio/df_visual_frontend/config/f4_v2/cam3_fisheye.yaml
+docker/docker_diff_vio/df_visual_frontend/config/f4_v2/f4_v2_virtural_stereo.yaml
+docker/docker_diff_vio/fusion_odometry/config/virtual_stereo_seek_v2.yaml

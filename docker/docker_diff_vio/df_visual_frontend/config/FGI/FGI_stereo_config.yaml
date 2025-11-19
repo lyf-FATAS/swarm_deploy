@@ -1,0 +1,40 @@
+%YAML:1.0
+---
+
+camera_topic: ["/left/downsample_raw", "/right/downsample_raw"]  # camera topic names
+camera_info:  ["cam0.yaml",   "cam1.yaml"  ]  # camera info file names
+camera_mask:  []
+
+# frontend configuration
+tracking_type: "general_stereo"       # tracking type: ["virtual_stereo", "general_stereo", "EIS_fisheye"]
+max_feature_per_frame: 150            # max feature number in feature tracking
+min_feature_distance: 30              # min distance between two features
+inv_flow_dis_thresh: 0.5              # inverse flow distance threshold
+quality_level: 0.01                   # quality level for Shi-Tomasi corner detection
+track_show_status: [1, 0]          # tracking results visualization [enable/disable, draw features, draw ids]
+always_keyframe: 1                 # always keyframe: [0, 1]
+
+body_T_cam0: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: d
+   data: [0.00555786,  0.99997899, -0.00333593,  0.00073847,
+         0.99994638, -0.00552847,  0.00875655,  0.00003206,
+         0.00873793, -0.00338442, -0.9999561,   0.0001082,
+         0.,          0.,          0.,          1.        ]
+
+body_T_cam1: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: d
+   data: [0.00332251,  0.99999448, -0.00007687,  0.00215741,
+         0.9999335,  -0.00332146,  0.01104404,  0.30027538,
+         0.01104372, -0.00011356, -0.99993901, -0.0014825,
+         0.,          0.,          0.,          1.        ]
+
+extractor_weight_path: "/root/ros_install/share/dr_frontend_merge_ws/src/nn_df_visual_front/thirdparty/weights_dpl/superpoint.onnx"
+matcher_weight_path: "/root/ros_install/share/dr_frontend_merge_ws/src/nn_df_visual_front/thirdparty/weights_dpl/superpoint_lightglue.trt.onnx"
+matche_score_threshold: 0.1
+ransacReprojThreshold: 8
+extrack_match_type: 0 # 0: harris + KLT, 1: superpoint + KLT, 2: superpoint + lightglue
+image_reproject: 0  # 0: no reproject, 1: reproject

@@ -28,3 +28,16 @@ When using NVIDIA Jetson, there are a couple of best practices to follow in orde
    sudo reboot
    jtop
    ```
+
+# Requirements
+
+1. [Python environment for YOLO11 inference.](https://docs.ultralytics.com/guides/nvidia-jetson/#run-on-jetpack-512)
+
+# Build Issues
+
+1. [AttributeError: module 'em' has no attribute 'RAW_OPT'](https://github.com/introlab/rtabmap_ros/issues/1081)
+
+   ```bash
+   pip uninstall empy
+   pip install empy==3.3.4
+   ```

@@ -1,0 +1,9 @@
+<!-- Launch File for running svo with ceres backend from bag-file -->
+<launch>
+  <arg name="calib_file" default="$(find df_visual_frontend)/config/euroc/euroc_stereo.yaml"/>
+
+  <!-- dr-vins-visual-frontend -->
+  <node pkg="df_visual_frontend" type="test_track_pipeline" name="df_visual_frontend_node"
+   clear_params="true" output="screen" args="$(arg calib_file)">
+  </node>
+</launch>

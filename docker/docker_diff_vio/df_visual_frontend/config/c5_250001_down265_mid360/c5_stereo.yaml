@@ -1,0 +1,33 @@
+%YAML:1.0
+---
+
+camera_topic: ["/T265/camera/fisheye1/image_raw", "/T265/camera/fisheye2/image_raw"]  # camera topic names
+camera_info:  ["cam0_fisheye.yaml",   "cam1_fisheye.yaml"  ]  # camera info file names
+camera_mask:  ["848x800_fisheye_mask.png", "848x800_fisheye_mask.png"]
+
+# frontend configuration
+tracking_type: "general_stereo"       # tracking type: ["virtual_stereo", "general_stereo", "EIS_fisheye"]
+max_feature_per_frame: 150            # max feature number in feature tracking
+min_feature_distance: 30              # min distance between two features
+inv_flow_dis_thresh: 0.5              # inverse flow distance threshold
+quality_level: 0.01                   # quality level for Shi-Tomasi corner detection
+track_show_status: [1, 1]          # tracking results visualization [enable/disable, draw features, draw ids]
+always_keyframe: 1                 # always keyframe: [0, 1]
+
+body_T_cam0: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: d
+   data: [-0.00250959,  0.99973582, -0.02284701,  0.06323154,
+           0.999912,    0.0022111,  -0.01308061, -0.05275251,
+          -0.01302664, -0.02287783, -0.9996534,  -0.0685827 ,
+           0.,          0.,          0.,          1.        ]
+
+body_T_cam1: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: d
+   data: [-0.00118921,  0.99984016, -0.01783953,  0.06333611,
+           0.99998772,  0.00110317, -0.00483227,  0.01127982,
+          -0.00481182, -0.01784505, -0.99982919, -0.06875547,
+           0.,          0.,          0.,          1.        ]

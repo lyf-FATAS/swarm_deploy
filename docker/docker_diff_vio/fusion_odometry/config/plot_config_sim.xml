@@ -1,0 +1,750 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+ <tabbed_widget parent="main_window" name="Main Window">
+  <Tab containers="1" tab_name="time cost">
+   <Container>
+    <DockSplitter count="1" orientation="-" sizes="1">
+     <DockArea name="...">
+      <plot mode="TimeSeries" flip_x="false" flip_y="false" style="LinesAndDots">
+       <range top="5.142034" right="19.964701" left="0.000000" bottom="-0.125282"/>
+       <limitY/>
+       <curve color="#1f77b4" name="fusion_odometry/time_cost/process_imu_ms"/>
+       <curve color="#d62728" name="fusion_odometry/time_cost/process_once_ms"/>
+       <curve color="#1ac938" name="fusion_odometry/time_cost/process_visual_ms"/>
+       <curve color="#b4751f" name="fusion_odometry/time_cost/process_lidar_ms"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="score">
+   <Container>
+    <DockSplitter count="1" orientation="-" sizes="1">
+     <DockSplitter count="2" orientation="|" sizes="0.500955;0.499045">
+      <DockSplitter count="2" orientation="-" sizes="0.50161;0.49839">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.025000" right="19.964701" left="0.000000" bottom="-0.025000"/>
+         <limitY/>
+         <curve color="#ff7f0e" name="monitor/states/fusion_score"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.842778" right="19.964701" left="0.000000" bottom="-0.020556"/>
+         <limitY/>
+         <curve color="#9467bd" name="monitor/states/visual_score"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter count="2" orientation="-" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.025000" right="19.964701" left="0.000000" bottom="-0.025000"/>
+         <limitY/>
+         <curve color="#f14cc1" name="monitor/states/imu_score"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.000000" right="1.000000" left="0.000000" bottom="0.000000"/>
+         <limitY/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="parallex">
+   <Container>
+    <DockSplitter count="1" orientation="-" sizes="1">
+     <DockSplitter count="2" orientation="|" sizes="0.501433;0.498567">
+      <DockSplitter count="2" orientation="-" sizes="0.502415;0.497585">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="40.415172" right="19.964701" left="0.000000" bottom="-0.985736"/>
+         <limitY/>
+         <curve color="#f14cc1" name="visual_manager/dir 0 status/current_two_frames_mean_parallex_angle_deg"/>
+         <curve color="#9467bd" name="visual_manager/dir 0 status/mean_max_parallex_angle_deg"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="58.659710" right="19.964701" left="0.000000" bottom="-1.430725"/>
+         <limitY/>
+         <curve color="#1f77b4" name="visual_manager/dir 2 status/current_two_frames_mean_parallex_angle_deg"/>
+         <curve color="#d62728" name="visual_manager/dir 2 status/mean_max_parallex_angle_deg"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter count="2" orientation="-" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="58.707580" right="19.964701" left="0.000000" bottom="-1.431892"/>
+         <limitY/>
+         <curve color="#17becf" name="visual_manager/dir 1 status/current_two_frames_mean_parallex_angle_deg"/>
+         <curve color="#bcbd22" name="visual_manager/dir 1 status/mean_max_parallex_angle_deg"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="61.161107" right="19.964701" left="0.000000" bottom="-1.491734"/>
+         <limitY/>
+         <curve color="#1ac938" name="visual_manager/dir 3 status/current_two_frames_mean_parallex_angle_deg"/>
+         <curve color="#ff7f0e" name="visual_manager/dir 3 status/mean_max_parallex_angle_deg"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="track ratio">
+   <Container>
+    <DockSplitter count="1" orientation="-" sizes="1">
+     <DockSplitter count="2" orientation="|" sizes="0.501433;0.498567">
+      <DockSplitter count="2" orientation="-" sizes="0.502415;0.497585">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.025000" right="19.964701" left="0.000000" bottom="-0.025000"/>
+         <limitY/>
+         <curve color="#17becf" name="visual_manager/dir 0 status/ratio_of_tracked_points"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.002778" right="19.964701" left="0.000000" bottom="0.886111"/>
+         <limitY/>
+         <curve color="#1f77b4" name="visual_manager/dir 2 status/ratio_of_tracked_points"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter count="2" orientation="-" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.025000" right="19.964701" left="0.000000" bottom="-0.025000"/>
+         <limitY/>
+         <curve color="#bcbd22" name="visual_manager/dir 1 status/ratio_of_tracked_points"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.012500" right="19.964701" left="0.000000" bottom="0.487500"/>
+         <limitY/>
+         <curve color="#d62728" name="visual_manager/dir 3 status/ratio_of_tracked_points"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="keyframe/main_dir">
+   <Container>
+    <DockSplitter count="2" orientation="-" sizes="0.502415;0.497585">
+     <DockArea name="...">
+      <plot mode="TimeSeries" flip_x="false" flip_y="false" style="LinesAndDots">
+       <range top="15.424510" right="19.964701" left="0.000000" bottom="-0.376208"/>
+       <limitY/>
+       <curve color="#f14cc1" name="visual_manager/dir 0 status/current_two_frames_mean_parallex_angle_deg"/>
+       <curve color="#17becf" name="visual_manager/dir 1 status/current_two_frames_mean_parallex_angle_deg"/>
+       <curve color="#1f77b4" name="visual_manager/dir 2 status/current_two_frames_mean_parallex_angle_deg"/>
+       <curve color="#1ac938" name="visual_manager/dir 3 status/current_two_frames_mean_parallex_angle_deg"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+       <range top="2.050000" right="19.964701" left="0.000000" bottom="-0.050000"/>
+       <limitY/>
+       <curve color="#f14cc1" name="visual_manager/status/main_direction_id"/>
+       <curve color="#9467bd" name="visual_manager/status/is_keyframe"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="track/use num">
+   <Container>
+    <DockSplitter count="2" orientation="-" sizes="0.502415;0.497585">
+     <DockSplitter count="2" orientation="|" sizes="0.501433;0.498567">
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="36.900000" right="19.964701" left="0.000000" bottom="-0.900000"/>
+        <limitY/>
+        <curve color="#c91a21" name="visual_manager/dir 0 status/num_of_outliers"/>
+        <curve color="#1eff0e" name="visual_manager/dir 0 status/num_of_point_candidates"/>
+        <curve color="#ff27de" name="visual_manager/dir 0 status/num_of_tracked_points"/>
+        <curve color="#9f20ff" name="visual_manager/dir 0 status/num_of_triangulized_points"/>
+        <curve color="#ffffff" name="visual_manager/dir 0 status/num_of_used_points"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="36.900000" right="19.964701" left="0.000000" bottom="-0.900000"/>
+        <limitY/>
+        <curve color="#bd2226" name="visual_manager/dir 1 status/num_of_outliers"/>
+        <curve color="#2eb41f" name="visual_manager/dir 1 status/num_of_point_candidates"/>
+        <curve color="#f119dd" name="visual_manager/dir 1 status/num_of_tracked_points"/>
+        <curve color="#a815e9" name="visual_manager/dir 1 status/num_of_triangulized_points"/>
+        <curve color="#ffffff" name="visual_manager/dir 1 status/num_of_used_points"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockSplitter count="2" orientation="|" sizes="0.502388;0.497612">
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="36.900000" right="19.964701" left="0.000000" bottom="-0.900000"/>
+        <limitY/>
+        <curve color="#ff0003" name="visual_manager/dir 2 status/num_of_outliers"/>
+        <curve color="#3aff00" name="visual_manager/dir 2 status/num_of_point_candidates"/>
+        <curve color="#cf17bb" name="visual_manager/dir 2 status/num_of_tracked_points"/>
+        <curve color="#9123d2" name="visual_manager/dir 2 status/num_of_triangulized_points"/>
+        <curve color="#ffffff" name="visual_manager/dir 2 status/num_of_used_points"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="7.175000" right="19.964701" left="0.000000" bottom="-0.175000"/>
+        <limitY/>
+        <curve color="#ff0001" name="visual_manager/dir 3 status/num_of_outliers"/>
+        <curve color="#0efd00" name="visual_manager/dir 3 status/num_of_point_candidates"/>
+        <curve color="#fd0eff" name="visual_manager/dir 3 status/num_of_tracked_points"/>
+        <curve color="#b400ff" name="visual_manager/dir 3 status/num_of_triangulized_points"/>
+        <curve color="#ffffff" name="visual_manager/dir 3 status/num_of_used_points"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="reprojection error">
+   <Container>
+    <DockSplitter count="1" orientation="-" sizes="1">
+     <DockSplitter count="2" orientation="|" sizes="0.501433;0.498567">
+      <DockSplitter count="2" orientation="-" sizes="0.502415;0.497585">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.008376" right="19.964701" left="0.000000" bottom="-0.000204"/>
+         <limitY/>
+         <curve color="#17becf" name="visual_manager/dir 0 status/mean_reprojection_residual"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.012286" right="19.964701" left="0.000000" bottom="-0.000300"/>
+         <limitY/>
+         <curve color="#1f77b4" name="visual_manager/dir 2 status/mean_reprojection_residual"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter count="2" orientation="-" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.012209" right="19.964701" left="0.000000" bottom="-0.000298"/>
+         <limitY/>
+         <curve color="#bcbd22" name="visual_manager/dir 1 status/mean_reprojection_residual"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.011024" right="19.964701" left="0.000000" bottom="-0.000269"/>
+         <limitY/>
+         <curve color="#d62728" name="visual_manager/dir 3 status/mean_reprojection_residual"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="imu measure">
+   <Container>
+    <DockSplitter count="3" orientation="-" sizes="0.333602;0.332796;0.333602">
+     <DockArea name="...">
+      <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+       <range top="20.871568" right="19.964701" left="0.000000" bottom="-6.666488"/>
+       <limitY/>
+       <curve color="#17becf" name="imu_manager/measure/accel_x_mps2"/>
+       <curve color="#bcbd22" name="imu_manager/measure/accel_y_mps2"/>
+       <curve color="#1f77b4" name="imu_manager/measure/accel_z_mps2"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+       <range top="20.895184" right="19.964701" left="0.000000" bottom="-0.509639"/>
+       <limitY/>
+       <curve color="#1ac938" name="imu_manager/measure/accel_norm"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+       <range top="1.061115" right="19.964701" left="0.000000" bottom="-1.094965"/>
+       <limitY/>
+       <curve color="#d62728" name="imu_manager/measure/gyro_x_rps"/>
+       <curve color="#1ac938" name="imu_manager/measure/gyro_y_rps"/>
+       <curve color="#ff7f0e" name="imu_manager/measure/gyro_z_rps"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="measure buffer">
+   <Container>
+    <DockSplitter count="1" orientation="-" sizes="1">
+     <DockSplitter count="2" orientation="|" sizes="0.501433;0.498567">
+      <DockSplitter count="2" orientation="-" sizes="0.502415;0.497585">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="5.125000" right="19.964701" left="0.000000" bottom="-0.125000"/>
+         <limitY/>
+         <curve color="#f14cc1" name="visual_manager/dir 0 status/measure_buffer_size"/>
+         <curve color="#9467bd" name="visual_manager/dir 0 status/num_of_stored_frames"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="5.125000" right="19.964701" left="0.000000" bottom="-0.125000"/>
+         <limitY/>
+         <curve color="#1f77b4" name="visual_manager/dir 2 status/measure_buffer_size"/>
+         <curve color="#d62728" name="visual_manager/dir 2 status/num_of_stored_frames"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter count="2" orientation="-" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="5.125000" right="19.964701" left="0.000000" bottom="-0.125000"/>
+         <limitY/>
+         <curve color="#17becf" name="visual_manager/dir 1 status/measure_buffer_size"/>
+         <curve color="#bcbd22" name="visual_manager/dir 1 status/num_of_stored_frames"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="5.125000" right="19.964701" left="0.000000" bottom="-0.125000"/>
+         <limitY/>
+         <curve color="#1ac938" name="visual_manager/dir 3 status/measure_buffer_size"/>
+         <curve color="#ff7f0e" name="visual_manager/dir 3 status/num_of_stored_frames"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="sigma scale">
+   <Container>
+    <DockSplitter count="1" orientation="-" sizes="1">
+     <DockSplitter count="2" orientation="|" sizes="0.500955;0.499045">
+      <DockSplitter count="2" orientation="-" sizes="0.50161;0.49839">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.945591" right="19.964701" left="0.000000" bottom="-0.047453"/>
+         <limitY/>
+         <curve color="#1f77b4" name="sigma_balancer/status/imu_gravity_sigma_scale"/>
+         <curve color="#ff7f0e" name="sigma_balancer/status/imu_gravity_updating"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.025000" right="19.964701" left="0.000000" bottom="-0.025000"/>
+         <limitY/>
+         <curve color="#17becf" name="sigma_balancer/status/imu_zero_velocity_sigma_scale"/>
+         <curve color="#1ac938" name="sigma_balancer/status/imu_zero_velocity_updating"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter count="2" orientation="-" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.025000" right="19.964701" left="0.000000" bottom="-0.025000"/>
+         <limitY/>
+         <curve color="#f14cc1" name="sigma_balancer/status/imu_zero_angular_velocity_sigma_scale"/>
+         <curve color="#9467bd" name="sigma_balancer/status/imu_zero_angular_velocity_updating"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="1.025000" right="19.964701" left="0.000000" bottom="-0.025000"/>
+         <limitY/>
+         <curve color="#bcbd22" name="sigma_balancer/status/visual_points_sigma_scale"/>
+         <curve color="#d62728" name="sigma_balancer/status/visual_points_updating"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="current state">
+   <Container>
+    <DockSplitter count="3" orientation="-" sizes="0.333602;0.332796;0.333602">
+     <DockSplitter count="2" orientation="|" sizes="0.501433;0.498567">
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="18.684931" right="19.964701" left="0.000000" bottom="-32.166988"/>
+        <limitY/>
+        <curve color="#d62728" name="fusion_odometry/state/p_wi_x"/>
+        <curve color="#1ac938" name="fusion_odometry/state/p_wi_y"/>
+        <curve color="#ff7f0e" name="fusion_odometry/state/p_wi_z"/>
+        <curve color="#bcbd22" name="fusion_odometry/state/is_motion_valid"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="6.278235" right="19.964701" left="0.000000" bottom="-6.660106"/>
+        <limitY/>
+        <curve color="#f14cc1" name="fusion_odometry/state/v_wi_x"/>
+        <curve color="#9467bd" name="fusion_odometry/state/v_wi_y"/>
+        <curve color="#17becf" name="fusion_odometry/state/v_wi_z"/>
+        <curve color="#bcbd22" name="fusion_odometry/state/is_motion_valid"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockSplitter count="2" orientation="|" sizes="0.502388;0.497612">
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="188.754248" right="19.964701" left="0.000000" bottom="-188.626332"/>
+        <limitY/>
+        <curve color="#f14cc1" name="fusion_odometry/state/q_wi_pitch"/>
+        <curve color="#9467bd" name="fusion_odometry/state/q_wi_roll"/>
+        <curve color="#17becf" name="fusion_odometry/state/q_wi_yaw"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="10.858089" right="19.964701" left="0.000000" bottom="-10.939833"/>
+        <limitY/>
+        <curve color="#bcbd22" name="fusion_odometry/state/a_wi_x"/>
+        <curve color="#1f77b4" name="fusion_odometry/state/a_wi_y"/>
+        <curve color="#d62728" name="fusion_odometry/state/a_wi_z"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockSplitter count="2" orientation="|" sizes="0.502388;0.497612">
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="0.727729" right="19.964701" left="0.000000" bottom="-0.428260"/>
+        <limitY/>
+        <curve color="#1ac938" name="fusion_odometry/state/bias_a_x"/>
+        <curve color="#ff7f0e" name="fusion_odometry/state/bias_a_y"/>
+        <curve color="#f14cc1" name="fusion_odometry/state/bias_a_z"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="0.003458" right="19.964701" left="0.000000" bottom="-0.003007"/>
+        <limitY/>
+        <curve color="#9467bd" name="fusion_odometry/state/bias_g_x"/>
+        <curve color="#17becf" name="fusion_odometry/state/bias_g_y"/>
+        <curve color="#bcbd22" name="fusion_odometry/state/bias_g_z"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="lazy state">
+   <Container>
+    <DockSplitter count="2" orientation="-" sizes="0.502415;0.497585">
+     <DockSplitter count="2" orientation="|" sizes="0.501433;0.498567">
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="18.715768" right="19.964701" left="0.000000" bottom="-32.155416"/>
+        <limitY/>
+        <curve color="#1ac938" name="imu_manager/state/p_wi_x"/>
+        <curve color="#ff7f0e" name="imu_manager/state/p_wi_y"/>
+        <curve color="#f14cc1" name="imu_manager/state/p_wi_z"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="6.408643" right="19.964701" left="0.000000" bottom="-6.536633"/>
+        <limitY/>
+        <curve color="#9467bd" name="imu_manager/state/v_wi_x"/>
+        <curve color="#17becf" name="imu_manager/state/v_wi_y"/>
+        <curve color="#bcbd22" name="imu_manager/state/v_wi_z"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockSplitter count="2" orientation="|" sizes="0.502388;0.497612">
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="0.003573" right="19.964701" left="0.000000" bottom="-0.003200"/>
+        <limitY/>
+        <curve color="#ff7f0e" name="imu_manager/state/bias_g_x"/>
+        <curve color="#f14cc1" name="imu_manager/state/bias_g_y"/>
+        <curve color="#9467bd" name="imu_manager/state/bias_g_z"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+        <range top="0.732301" right="19.964701" left="0.000000" bottom="-0.430751"/>
+        <limitY/>
+        <curve color="#1f77b4" name="imu_manager/state/bias_a_x"/>
+        <curve color="#d62728" name="imu_manager/state/bias_a_y"/>
+        <curve color="#1ac938" name="imu_manager/state/bias_a_z"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="lazy state std">
+   <Container>
+    <DockSplitter count="1" orientation="-" sizes="1">
+     <DockSplitter count="2" orientation="|" sizes="0.500478;0.499522">
+      <DockSplitter count="4" orientation="-" sizes="0.25;0.25;0.25;0.25">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.107741" right="19.964701" left="0.000000" bottom="-0.002628"/>
+         <limitY/>
+         <curve color="#9467bd" name="fusion_odometry/state_std/p_wi_x"/>
+         <curve color="#17becf" name="fusion_odometry/state_std/p_wi_y"/>
+         <curve color="#bcbd22" name="fusion_odometry/state_std/p_wi_z"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="188.754248" right="19.964701" left="0.000000" bottom="-188.626332"/>
+         <limitY/>
+         <curve color="#9467bd" name="fusion_odometry/state/q_wi_yaw"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.001812" right="19.964701" left="0.000000" bottom="-0.000044"/>
+         <limitY/>
+         <curve color="#1f77b4" name="fusion_odometry/state_std/q_wi_x"/>
+         <curve color="#d62728" name="fusion_odometry/state_std/q_wi_y"/>
+         <curve color="#1ac938" name="fusion_odometry/state_std/q_wi_z"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.048741" right="19.964701" left="0.000000" bottom="-0.001189"/>
+         <limitY/>
+         <curve color="#ff7f0e" name="fusion_odometry/state_std/v_wi_x"/>
+         <curve color="#f14cc1" name="fusion_odometry/state_std/v_wi_y"/>
+         <curve color="#9467bd" name="fusion_odometry/state_std/v_wi_z"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter count="4" orientation="-" sizes="0.25;0.25;0.25;0.25">
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.010260" right="19.964701" left="0.000000" bottom="-0.000250"/>
+         <limitY/>
+         <curve color="#17becf" name="fusion_odometry/state_std/bias_a_x"/>
+         <curve color="#bcbd22" name="fusion_odometry/state_std/bias_a_y"/>
+         <curve color="#1f77b4" name="fusion_odometry/state_std/bias_a_z"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.727729" right="19.964701" left="0.000000" bottom="-0.428260"/>
+         <limitY/>
+         <curve color="#bcbd22" name="fusion_odometry/state/bias_a_x"/>
+         <curve color="#1f77b4" name="fusion_odometry/state/bias_a_y"/>
+         <curve color="#d62728" name="fusion_odometry/state/bias_a_z"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.000362" right="19.964701" left="0.000000" bottom="-0.000009"/>
+         <limitY/>
+         <curve color="#d62728" name="fusion_odometry/state_std/bias_g_x"/>
+         <curve color="#1ac938" name="fusion_odometry/state_std/bias_g_y"/>
+         <curve color="#ff7f0e" name="fusion_odometry/state_std/bias_g_z"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+         <range top="0.003458" right="19.964701" left="0.000000" bottom="-0.003007"/>
+         <limitY/>
+         <curve color="#1ac938" name="fusion_odometry/state/bias_g_x"/>
+         <curve color="#ff7f0e" name="fusion_odometry/state/bias_g_y"/>
+         <curve color="#f14cc1" name="fusion_odometry/state/bias_g_z"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="lidar local map">
+   <Container>
+    <DockSplitter count="2" orientation="-" sizes="0.5;0.5">
+     <DockArea name="...">
+      <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+       <range top="1.025000" right="19.964701" left="0.000000" bottom="-0.025000"/>
+       <limitY/>
+       <curve color="#9467bd" name="lidar_manager/status/is_keyframe"/>
+       <curve color="#bcbd22" name="lidar_manager/status/overlap_ratio"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot mode="TimeSeries" flip_x="false" flip_y="false" style="Lines">
+       <range top="14262.875000" right="19.964701" left="0.000000" bottom="-347.875000"/>
+       <limitY/>
+       <curve color="#17becf" name="lidar_manager/status/num_of_used_points"/>
+       <curve color="#1f77b4" name="lidar_manager/status/num_of_current_scan_points"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <currentTabIndex index="0"/>
+ </tabbed_widget>
+ <use_relative_time_offset enabled="0"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <!-- - - - - - - - - - - - - - - -->
+ <Plugins>
+  <plugin ID="DataLoad CSV">
+   <parameters delimiter="0" time_axis="state/time_stamp_s"/>
+  </plugin>
+  <plugin ID="DataLoad MCAP"/>
+  <plugin ID="DataLoad ROS bags">
+   <use_header_stamp value="false"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+   <boolean_strings_to_number value="true"/>
+   <remove_suffix_from_strings value="true"/>
+   <selected_topics value=""/>
+  </plugin>
+  <plugin ID="DataLoad ULog"/>
+  <plugin ID="ROS Topic Subscriber">
+   <use_header_stamp value="false"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+   <boolean_strings_to_number value="true"/>
+   <remove_suffix_from_strings value="true"/>
+   <selected_topics value="/fusion_odometry/current_point_odom"/>
+  </plugin>
+  <plugin ID="UDP Server"/>
+  <plugin ID="WebSocket Server"/>
+  <plugin ID="ZMQ Subscriber"/>
+  <plugin ID="Fast Fourier Transform"/>
+  <plugin ID="Quaternion to RPY"/>
+  <plugin ID="Reactive Script Editor">
+   <library code="--[[ Helper function to create a series from arrays&#xa;&#xa; new_series: a series previously created with ScatterXY.new(name)&#xa; prefix:     prefix of the timeseries, before the index of the array&#xa; suffix_X:   suffix to complete the name of the series containing the X value. If [nil], use the index of the array.&#xa; suffix_Y:   suffix to complete the name of the series containing the Y value&#xa; timestamp:   usually the tracker_time variable&#xa;              &#xa; Example:&#xa; &#xa; Assuming we have multiple series in the form:&#xa; &#xa;   /trajectory/node.{X}/position/x&#xa;   /trajectory/node.{X}/position/y&#xa;   &#xa; where {N} is the index of the array (integer). We can create a reactive series from the array with:&#xa; &#xa;   new_series = ScatterXY.new(&quot;my_trajectory&quot;) &#xa;   CreateSeriesFromArray( new_series, &quot;/trajectory/node&quot;, &quot;position/x&quot;, &quot;position/y&quot;, tracker_time );&#xa;--]]&#xa;&#xa;function CreateSeriesFromArray( new_series, prefix, suffix_X, suffix_Y, timestamp )&#xa;  &#xa;  --- clear previous values&#xa;  new_series:clear()&#xa;  &#xa;  --- Append points to new_series&#xa;  index = 0&#xa;  while(true) do&#xa;&#xa;    x = index;&#xa;    -- if not nil, get the X coordinate from a series&#xa;    if suffix_X ~= nil then &#xa;      series_x = TimeseriesView.find( string.format( &quot;%s.%d/%s&quot;, prefix, index, suffix_X) )&#xa;      if series_x == nil then break end&#xa;      x = series_x:atTime(timestamp)&#x9; &#xa;    end&#xa;    &#xa;    series_y = TimeseriesView.find( string.format( &quot;%s.%d/%s&quot;, prefix, index, suffix_Y) )&#xa;    if series_y == nil then break end &#xa;    y = series_y:atTime(timestamp)&#xa;    &#xa;    new_series:push_back(x,y)&#xa;    index = index+1&#xa;  end&#xa;end&#xa;&#xa;--[[ Similar to the built-in function GetSeriesNames(), but select only the names with a give prefix. --]]&#xa;&#xa;function GetSeriesNamesByPrefix(prefix)&#xa;  -- GetSeriesNames(9 is a built-in function&#xa;  all_names = GetSeriesNames()&#xa;  filtered_names = {}&#xa;  for i, name in ipairs(all_names)  do&#xa;    -- check the prefix&#xa;    if name:find(prefix, 1, #prefix) then&#xa;      table.insert(filtered_names, name);&#xa;    end&#xa;  end&#xa;  return filtered_names&#xa;end&#xa;&#xa;--[[ Modify an existing series, applying offsets to all their X and Y values&#xa;&#xa; series: an existing timeseries, obtained with TimeseriesView.find(name)&#xa; delta_x: offset to apply to each x value&#xa; delta_y: offset to apply to each y value &#xa;  &#xa;--]]&#xa;&#xa;function ApplyOffsetInPlace(series, delta_x, delta_y)&#xa;  -- use C++ indeces, not Lua indeces&#xa;  for index=0, series:size()-1 do&#xa;    x,y = series:at(index)&#xa;    series:set(index, x + delta_x, y + delta_y)&#xa;  end&#xa;end&#xa;"/>
+   <scripts/>
+  </plugin>
+  <plugin ID="CSV Exporter"/>
+  <plugin ID="ROS /rosout Visualization"/>
+  <plugin ID="ROS Topic Re-Publisher"/>
+ </Plugins>
+ <!-- - - - - - - - - - - - - - - -->
+ <previouslyLoaded_Datafiles>
+  <fileInfo filename="../output/imu_manager.csv" prefix="imu_manager">
+   <plugin ID="DataLoad CSV">
+    <parameters delimiter="0" time_axis="state/time_stamp_s"/>
+   </plugin>
+  </fileInfo>
+  <fileInfo filename="../output/visual_manager.csv" prefix="visual_manager">
+   <plugin ID="DataLoad CSV">
+    <parameters delimiter="0" time_axis="states/time_stamp_s"/>
+   </plugin>
+  </fileInfo>
+  <fileInfo filename="../output/fusion_odometry.csv" prefix="fusion_odometry">
+   <plugin ID="DataLoad CSV">
+    <parameters delimiter="0" time_axis="state/time_stamp_s"/>
+   </plugin>
+  </fileInfo>
+  <fileInfo filename="../output/sigma_balancer.csv" prefix="sigma_balancer">
+   <plugin ID="DataLoad CSV">
+    <parameters delimiter="0" time_axis="status/time_stamp_s"/>
+   </plugin>
+  </fileInfo>
+  <fileInfo filename="../output/monitor.csv" prefix="monitor">
+   <plugin ID="DataLoad CSV">
+    <parameters delimiter="0" time_axis="states/time_stamp_s"/>
+   </plugin>
+  </fileInfo>
+  <fileInfo filename="../output/lidar_manager.csv" prefix="lidar_manager">
+   <plugin ID="DataLoad CSV">
+    <parameters delimiter="0" time_axis="state/time_stamp_s"/>
+   </plugin>
+  </fileInfo>
+ </previouslyLoaded_Datafiles>
+ <!-- - - - - - - - - - - - - - - -->
+ <customMathEquations>
+  <snippet name="fusion_odometry/state/q_wi_yaw">
+   <global></global>
+   <function>w = value
+x = v1
+y = v2
+z = v3
+
+dcm10 = 2 * (x * y + w * z)
+dcm00 = w*w + x*x - y*y - z*z
+
+yaw = math.atan(dcm10, dcm00) * 57.29
+
+return yaw</function>
+   <linked_source>fusion_odometry/state/q_wi_w</linked_source>
+   <additional_sources>
+    <v1>fusion_odometry/state/q_wi_x</v1>
+    <v2>fusion_odometry/state/q_wi_y</v2>
+    <v3>fusion_odometry/state/q_wi_z</v3>
+   </additional_sources>
+  </snippet>
+  <snippet name="fusion_odometry/state/q_wi_roll">
+   <global></global>
+   <function>w = value
+x = v1
+y = v2
+z = v3
+
+dcm21 = 2 * (w * x + y * z)
+dcm22 = w*w - x*x - y*y + z*z
+
+roll = math.atan(dcm21, dcm22) * 57.29
+
+return roll</function>
+   <linked_source>fusion_odometry/state/q_wi_w</linked_source>
+   <additional_sources>
+    <v1>fusion_odometry/state/q_wi_x</v1>
+    <v2>fusion_odometry/state/q_wi_y</v2>
+    <v3>fusion_odometry/state/q_wi_z</v3>
+   </additional_sources>
+  </snippet>
+  <snippet name="fusion_odometry/state/q_wi_pitch">
+   <global></global>
+   <function>w = value
+x = v1
+y = v2
+z = v3
+
+dcm20 = 2 * (x * z - w * y)
+
+pitch = math.asin(-dcm20) * 57.29
+
+return pitch</function>
+   <linked_source>fusion_odometry/state/q_wi_w</linked_source>
+   <additional_sources>
+    <v1>fusion_odometry/state/q_wi_x</v1>
+    <v2>fusion_odometry/state/q_wi_y</v2>
+    <v3>fusion_odometry/state/q_wi_z</v3>
+   </additional_sources>
+  </snippet>
+  <snippet name="imu_manager/measure/accel_norm">
+   <global></global>
+   <function>x = value
+y = v1
+z = v2
+
+norm = math.sqrt(x * x + y * y + z * z)
+
+return norm</function>
+   <linked_source>imu_manager/measure/accel_x_mps2</linked_source>
+   <additional_sources>
+    <v1>imu_manager/measure/accel_y_mps2</v1>
+    <v2>imu_manager/measure/accel_z_mps2</v2>
+   </additional_sources>
+  </snippet>
+ </customMathEquations>
+ <snippets/>
+ <!-- - - - - - - - - - - - - - - -->
+</root>

@@ -1,3 +1,6 @@
-[submodule "src/state_estimation/seeker"]
-	path = src/state_estimation/seeker
+[submodule "src/utils/vision_opencv"]
+	path = src/utils/vision_opencv
+	url = https://github.com/ros-perception/vision_opencv.git
+[submodule "src/estimation/seeker"]
+	path = src/estimation/seeker
 	url = git@github.com:lyf-FATAS/seeker.git

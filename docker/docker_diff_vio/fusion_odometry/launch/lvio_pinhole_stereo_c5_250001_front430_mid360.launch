@@ -1,0 +1,14 @@
+<!-- Launch File for running fusion_odometry. -->
+<launch>
+    <!-- image transport node -->
+    <node name="repub_compressed_image_d430_left" pkg="image_transport" type="republish" args="compressed in:=/D430/camera/infra1/image_rect_raw raw out:=/D430/camera/infra1/image_rect_raw" />
+    <node name="repub_compressed_image_d430_right" pkg="image_transport" type="republish" args="compressed in:=/D430/camera/infra2/image_rect_raw raw out:=/D430/camera/infra2/image_rect_raw" />
+
+    <!-- fusion odometry node -->
+    <arg name="fusion_odometry_config_file" default="$(find fusion_odometry)/config/c5_250001_front430_mid360.yaml"/>
+    <node pkg="fusion_odometry" type="run_on_ros" name="fusion_odometry_on_ros" clear_params="true" output="screen" args="$(arg fusion_odometry_config_file)"/>
+
+    <!-- visual frontend node -->
+    <arg name="visual_frontend_config_file" default="$(find df_visual_frontend)/config/c5_250001_front430_mid360/c5_stereo.yaml"/>
+    <node pkg="df_visual_frontend" type="test_track_pipeline" name="df_visual_frontend_node" clear_params="true" output="screen" args="$(arg visual_frontend_config_file)"/>
+</launch>
