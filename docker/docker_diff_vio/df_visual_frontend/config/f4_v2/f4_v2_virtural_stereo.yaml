@@ -1,0 +1,63 @@
+%YAML:1.0
+---
+
+camera_topic: ["/fisheye/left/image_raw", "/fisheye/right/image_raw", "/fisheye/bright/image_raw", "/fisheye/bleft/image_raw"]  # camera topic names
+camera_info:  ["cam0_fisheye.yaml", "cam1_fisheye.yaml", "cam2_fisheye.yaml", "cam3_fisheye.yaml"]                              # camera info file names
+camera_mask:  ["240_320_mask/mask-240-320-3.png","240_320_mask/mask-240-320-3.png","240_320_mask/mask-240-320-3.png","240_320_mask/mask-240-320-3.png"]
+
+# frontend configuration
+tracking_type: "virtual_stereo"       # tracking type: ["virtual_stereo", "general_stereo", "EIS_fisheye"]
+max_feature_per_frame: 150            # max feature number in feature tracking
+min_feature_distance: 20              # min distance between two features
+inv_flow_dis_thresh: 0.5              # inverse flow distance threshold
+quality_level: 0.01                   # quality level for Shi-Tomasi corner detection
+track_show_status: [1, 1]             # tracking results visualization [enable/disable, draw features, draw ids]
+always_keyframe: 1                 # always keyframe: [0, 1]
+
+# virtual stereo configuration
+virtual_stereo_image_width: 240             # virtual stereo image width
+virtual_stereo_image_height: 320            # virtual stereo image height
+virtual_stereo_image_fov: 90.0              # virtual stereo image field of view
+virtual_stereo_rotation_angle_left: -45.0   # virtual stereo rotation angle for left camera
+virtual_stereo_rotation_angle_right: 45.0   # virtual stereo rotation angle for right camera
+
+# CAM0------CAM1
+# |           |
+# |           |
+# CAM3------CAM2
+
+body_T_cam0: !!opencv-matrix
+    rows: 4
+    cols: 4
+    dt: d
+    data: [0.7019198807328844, -0.00034417730274183267, 0.7122558266338841, 0.05990873798289838,
+      -0.7122558711835499, -0.00066843694911628, 0.7019196016329842, 0.06643248809239176,
+      0.0002345133165137514, -0.9999997173669747, -0.0007143314882070984, 0.0035931944426212366,
+      0.0, 0.0, 0.0, 1.0]
+
+body_T_cam1: !!opencv-matrix
+    rows: 4
+    cols: 4
+    dt: d
+    data: [-0.7176465722160794, -0.001254387339643337, 0.6964063640568727, 0.058781341162408574,
+      -0.6962751904304627, 0.0207839922856769, -0.7174739610994197, -0.06793918554145091,
+      -0.013574114244927493, -0.9997832025879766, -0.015788959604565167, 0.002473103023763109,
+      0.0, 0.0, 0.0, 1.0]
+
+body_T_cam2: !!opencv-matrix
+    rows: 4
+    cols: 4
+    dt: d
+    data: [-0.7055719783963135, 0.0028615139673304605, -0.7086324823487312, -0.07578700258492141,
+      0.7085818552082722, 0.015465666545842388, -0.7054591183250053, -0.06674592652934358,
+      0.008940792555090367, -0.9998763047978013, -0.012939757817643125, 0.001874237138883424,
+      0.0, 0.0, 0.0, 1.0]
+
+body_T_cam3: !!opencv-matrix
+    rows: 4
+    cols: 4
+    dt: d
+    data: [0.7130916100472154, 0.027648788010136316, -0.7005254457918273, -0.07438770973835587,
+      0.7010360397677916, -0.018162173101849203, 0.7128945268515584, 0.067619286918402,
+      0.006987605237783945, -0.9994526902208964, -0.03233409011015911, 0.0011430364859274199,
+      0.0, 0.0, 0.0, 1.0]

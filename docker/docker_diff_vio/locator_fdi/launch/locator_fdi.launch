@@ -1,0 +1,9 @@
+<!-- Launch File for running locator_fdi. -->
+<launch>
+    <!-- locator_fdi node -->
+    <arg name="locator_fdi_config_file" default="$(find locator_fdi)/config/locator_fdi.yaml"/>
+    <node pkg="locator_fdi" type="run_fdi_on_ros" name="locator_fdi_on_ros" clear_params="true" output="screen" args="$(arg locator_fdi_config_file)"/>
+
+    <!-- rosbag recording using shell script -->
+    <node pkg="locator_fdi" type="record_log_bag.sh" name="locator_fdi_bag_recorder" output="screen"/>
+</launch>

@@ -1,0 +1,85 @@
+%YAML:1.0
+---
+
+imu_topic: ["/imu_data_raw"]
+visual_topic: ["/visual_track_result"]
+lidar_topic: [""]
+
+fusion:
+    p_ib: [0.0, 0.0, 0.0]
+    q_ib: [1.0, 0.0, 0.0, 0.0]
+
+imu_manager:
+    enable_initialize_when_stationary: 1
+    lazy_point_time_s: 0.35
+    stationary_detect:
+        accel_peak_peak: 0.3
+        gyro_peak_peak: 0.2
+    over_range_detect:
+        accel_norm: 30.0
+        gyro_norm: 10.0
+    imu_model:
+        accel_noise_sigma: 0.02
+        gyro_noise_sigma: 0.008
+        accel_random_walk_sigma: 0.005
+        gyro_random_walk_sigma: 0.0008
+    state_init_sigma:
+        p_wi: 1e-2
+        q_wi: 1e-3
+        v_wi: 1e-2
+        bias_a: 1e-2
+        bias_g: 5e-4
+    updaters:
+        gravity:
+            enable_update: 1
+            default_sigma: 10.0
+        zero_velocity:
+            enable_update: 1
+            default_sigma: 0.01
+        zero_angular_velocity:
+            enable_update: 1
+            default_sigma: 0.004
+
+visual_manager:
+    enable: 1
+    fix_all_p_ic: 1
+    max_number_of_cloned_poses: 6
+    outliers_rejection:
+        max_reprojection_error: 0.008
+    max_number_of_points_to_use: 40
+    min_number_of_points_to_use: 6
+    keyframe_selection:
+        min_tracking_ratio: 0.5
+        max_mean_parallex_angle: 7.0
+        min_number_of_triangulized_points: 15
+    state_init_sigma:
+        time_delay_s: 0.0
+        p_ic: 1e-7
+        q_ic: 1e-7
+    updaters:
+        points:
+            enable_update: 1
+            default_sigma: 0.008
+
+    number_of_cameras_per_direction: [2, 2, 2, 2]
+    p_ic_of_all_cameras: [0.059909,0.066432,0.003593,  
+                          0.058781,-0.067939,0.002473, 
+                          0.058781,-0.067939,0.002473, 
+                          -0.075787,-0.066746,0.001874,
+                          -0.075787,-0.066746,0.001874,
+                          -0.074388,0.067619,0.001143, 
+                          -0.074388,0.067619,0.001143, 
+                          0.059909,0.066432,0.003593]
+    q_ic_of_all_cameras: [ -0.497917,0.498422,-0.501742,0.501906,
+                           0.501049,-0.491366,0.509257,-0.498164,
+                           -0.005804,0.004807,0.714394,-0.699703,
+                            0.000233,0.001779,0.712554,-0.701615,
+                           0.503687,-0.497375,-0.504016,0.494859,
+                           -0.490642,0.513530,0.500189,-0.495346,
+                          0.700624,-0.713383,-0.006751,-0.012858,
+                           0.706865,-0.707339,0.002705,-0.002463]
+    debug:
+        draw_local_map: 0
+
+lidar_manager:
+    enable: 0

@@ -1,0 +1,12 @@
+.vscode/
+
+build/
+devel/
+.catkin_workspace
+src/CMakeLists.txt
+
+env_swarm/
+
+converted_config/
+
+*.bag

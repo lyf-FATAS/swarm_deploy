@@ -47,14 +47,14 @@ tmux split-window -h -t "$SESSION:1.0"      # 1.2
 
 # 1) 左上：若已存在同名容器，先删；再起容器并跑 VIO
 tmux send-keys -t "$SESSION:1.0" \
-'docker rm -f diff_vio >/dev/null 2>&1 || true
+'docker rm -f loc >/dev/null 2>&1 || true
 docker run -it --rm \
   --net=host \
-  --name diff_vio \
+  --name loc \
   -e ROS_IP=$(hostname -I | awk "{print \$1}") \
   -e ROS_MASTER_URI=http://localhost:11311 \
-  -v /home/nv/SWARM-Physical/docker/docker_diff_vio:/root/ros_install/share \
-  diff-robot:localization \
+  -v /home/nv/Wss/swarm_deploy/docker/docker_diff_vio:/root/ros_install/share \
+  diff-robot:localization_v1.6 \
   bash -lc "source /root/ros_install/setup.bash && roslaunch fusion_odometry vio_rectify_stereo_seeker_v2.launch"' C-m & sleep "$DELAY"
 
 # 2) 右上：起其他无人机观测节点

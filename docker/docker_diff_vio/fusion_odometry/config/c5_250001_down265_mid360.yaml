@@ -1,0 +1,94 @@
+%YAML:1.0
+---
+
+imu_topic: ["/mavros/imu/data"]
+visual_topic: ["/visual_track_result"]
+lidar_topic: ["/livox/lidar"]
+
+fusion:
+    p_ib: [0, 0, 0]
+    q_ib: [1, 0, 0, 0]
+
+imu_manager:
+    enable_initialize_when_stationary: 1
+    lazy_point_time_s: 0.2
+    stationary_detect:
+        accel_peak_peak: 0.25
+        gyro_peak_peak: 0.02
+    over_range_detect:
+        accel_norm: 30.0
+        gyro_norm: 10.0
+    imu_model:
+        accel_noise_sigma: 0.1
+        gyro_noise_sigma: 0.002
+        accel_random_walk_sigma: 0.008
+        gyro_random_walk_sigma: 0.0004
+    state_init_sigma:
+        p_wi: 1e-2
+        q_wi: 1e-3
+        v_wi: 1e-2
+        bias_a: 1e-2
+        bias_g: 5e-4
+    updaters:
+        gravity:
+            enable_update: 1
+            default_sigma: 10.0
+        zero_velocity:
+            enable_update: 1
+            default_sigma: 0.01
+        zero_angular_velocity:
+            enable_update: 1
+            default_sigma: 0.002
+
+visual_manager:
+    enable: 1
+    fix_all_p_ic: 1
+    max_number_of_cloned_poses: 6
+    outliers_rejection:
+        max_reprojection_error: 0.008
+    max_number_of_points_to_use: 40
+    min_number_of_points_to_use: 6
+    keyframe_selection:
+        min_tracking_ratio: 0.5
+        max_mean_parallex_angle: 7.0
+        min_number_of_triangulized_points: 15
+    state_init_sigma:
+        time_delay_s: 0.0
+        p_ic: 1e-7
+        q_ic: 1e-7
+    updaters:
+        points:
+            enable_update: 1
+            default_sigma: 0.008
+
+    number_of_cameras_per_direction: [2]
+    p_ic_of_all_cameras: [0.063232, -0.052753, -0.068583,
+                          0.063336, 0.011280, -0.068755]
+    q_ic_of_all_cameras: [-0.003468, 0.706210, 0.707880, -0.012699,
+                          -0.004604, 0.706671, 0.707482, -0.008013]
+    debug:
+        draw_local_map: 0
+
+lidar_manager:
+    enable: 1
+    fix_p_il: 1
+    lidar_scan_radius: 30.0
+    voxels:
+        downsample_length: 0.2
+        downsample_radius: 50.0
+    max_number_of_points_to_use: 1000
+    min_number_of_points_to_use: 100
+    state_init_sigma:
+        p_il: 1e-7
+        q_il: 1e-7
+    updaters:
+        scan:
+            enable_update: 1
+            default_sigma: 0.03
+    p_il: [0.025, 0.01, 0.1]
+    q_il: [0.701001, -0.0922979, 0.0923125, -0.701112]
+    voxel_map:
+        voxel_size: 0.5
+        max_number_of_points_to_append_once: 10000
+    debug:
+        draw_all_plane_points: 0

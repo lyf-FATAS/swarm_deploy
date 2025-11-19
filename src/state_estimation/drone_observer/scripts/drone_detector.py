@@ -22,8 +22,7 @@ class YoloBatchDetector:
         rospy.init_node('yolo_batch_detector', anonymous=True)
 
         # 加载YOLO模型（支持.pt/.engine等格式）
-        self.model_path = rospy.get_param('~model_path', '/home/nv/SWARM-Physical/src/drone_observer/model/yolo11_8_17_b4_fp16.engine')
-        # self.model_path = rospy.get_param('~model_path', '/home/nv/SWARM-Physical/src/drone_observer/model/best.pt')
+        self.model_path = rospy.get_param('~model_path', '/home/nv/Wss/swarm_deploy/src/state_estimation/drone_observer/model/yolo11_8_17_b4_fp16.engine')
         self.device = rospy.get_param('~device', 'cuda')  # 'cuda'或'cpu'
         self.model = YOLO(self.model_path, task='detect')
 

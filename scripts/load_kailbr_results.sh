@@ -8,8 +8,8 @@ set -euo pipefail
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # ===== 默认值 =====
-WORKDIR="${SCRIPT_DIR}/../src/seeker1/config/seeker_omni_depth"
-SCRIPT="${SCRIPT_DIR}/../src/seeker1/script/3_get_undistort_kalibr_info.py"
+WORKDIR="${SCRIPT_DIR}/../src/state_estimation/seeker/config/seeker_omni_depth"
+SCRIPT="${SCRIPT_DIR}/../src/state_estimation/seeker/script/3_get_undistort_kalibr_info.py"
 # 用当前终端环境的 python（可用环境变量 PYTHON 覆盖）
 PY="${PYTHON:-$(command -v python || command -v python3 || true)}"
 # =================

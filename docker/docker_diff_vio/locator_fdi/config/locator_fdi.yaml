@@ -1,0 +1,14 @@
+%YAML:1.0
+---
+
+# Subscribers.
+odometry_topic: /ekf_quat/ekf_odom
+imu_topic: /mavros/imu/data
+visual_topic: /visual_track_result
+lidar_topic: /livox/lidar
+
+# Publishers.
+fdi_publisher_topic: /locator_fdi/status
+
+# Basic options.
+report_status_in_terminal: 1

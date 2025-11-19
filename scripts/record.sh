@@ -1,6 +1,6 @@
 rosbag record --tcpnodelay \
-    /vrpn_client_node/TYNB/pose \
-    /vrpn_client_node/TYNB/twist \
+    /vrpn_client_node/swarm_drone_0/pose \
+    /vrpn_client_node/swarm_drone_0/twist \
     /ekf/ekf_odom \
     /mavros/imu/data \
     /mavros/setpoint_raw/target_attitude \
@@ -8,4 +8,3 @@ rosbag record --tcpnodelay \
     /fusion_odometry/current_point_odom \
     /drone_control/position_cmd \
     /debugPx4ctrl \
-    /other_drones \
