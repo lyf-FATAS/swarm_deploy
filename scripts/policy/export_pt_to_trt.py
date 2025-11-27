@@ -1,5 +1,3 @@
-#!/home/nv/SWARM-Physical/env_swarm/bin/python
-# -*- coding: utf-8 -*-
 """
 @file    export_pt_to_trt.py
 @brief   一键将策略 ckpt（.pt/.pth）导出为 ONNX 与 TensorRT Engine（.engine）

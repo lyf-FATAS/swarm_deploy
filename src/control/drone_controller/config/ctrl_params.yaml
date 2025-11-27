@@ -1,0 +1,33 @@
+# 控制与约束
+infer_dt: 0.05             # 推理周期 [s]
+control_dt: 0.01           # 控制周期 [s]
+
+action_clip: 1.0
+max_vel: 1.5               # 速度上限（模长）
+max_acc: 6.0               # 加速度上限（模长）
+
+# 观测尺寸
+drones_num: 5              # 总机数（含自身）
+virtual_obstacles_num: 3   # 虚拟观测数
+obs_history_len: 10
+
+# 调试与推理
+print_debug: true
+warmup_iters: 200
+model_path: /home/nv/Wss/swarm_deploy/src/drone_controller/model/acc_8_12_ideal.engine
+
+# 话题（可以按需改名）
+odom_topic: ""                            # 不再用 ekf，可留空
+others_topic: ""                          # 不再用点云，可留空
+
+target_topic:  target_position       # geometry_msgs/Point
+action_topic:  policy_action         # std_msgs/Float32MultiArray（发布，原始动作）
+
+# 动捕数据
+self_mocap_topic: "/swarm_drone_0/pose"   # nav_msgs/Odometry（VRPN pose）
+other_mocap_topics:                       # 列表顺序对应 other_drones_obs_ 的槽位
+  - "/swarm_drone_1/pose"
+  - "/swarm_drone_2/pose"
+  - "/swarm_drone_3/pose"
+  - "/swarm_drone_4/pose"
+use_mocap_for_others: true                # 若仍要用点云，把它设为 false

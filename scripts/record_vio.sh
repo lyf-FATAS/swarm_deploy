@@ -10,5 +10,5 @@ rosbag record --tcpnodelay \
     /fisheye/bright/image_raw/compressed \
     /fisheye/bleft/image_raw/compressed \
     /fusion_odometry/current_point_odom \
-    /drone_control/position_cmd \
+    /drone_controller/position_cmd \
     /debugPx4ctrl \

@@ -2,7 +2,7 @@
 # ============================================
 # load_policy.sh
 # 将任意 .pt/.pth 转为 ONNX + TensorRT engine，
-# 结果统一输出到 <repo_root>/src/drone_control/model/
+# 结果统一输出到 <repo_root>/src/drone_controller/model/
 # 依赖：export_pt_to_trt.py（优先在 scripts/ 下找，退而求其次 scripts/policy/）
 # 额外：把输入的 pt/pth 也一并复制到目标目录（同名可用 --force 覆盖）
 # ============================================
@@ -12,7 +12,7 @@ set -Eeuo pipefail
 # ---------- 推断仓库根与默认目标目录 ----------
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 REPO_ROOT="$(realpath "${SCRIPT_DIR}/..")"
-DEST_DIR_DEFAULT="${REPO_ROOT}/src/drone_control/model"
+DEST_DIR_DEFAULT="${REPO_ROOT}/src/drone_controller/model"
 
 # ---------- 默认配置（可在命令行覆盖） ----------
 DEST_DIR="${DEST_DIR_DEFAULT}"
@@ -47,7 +47,7 @@ usage() {
   $(basename "$0") [选项] <ckpt_path.pt|.pth>
 
 示例：
-  # 自动推断维度 + FP16 + 动态 batch(1/8/32) + 追加后缀，输出到 ../src/drone_control/model/
+  # 自动推断维度 + FP16 + 动态 batch(1/8/32) + 追加后缀，输出到 ../src/drone_controller/model/
   $(basename "$0") /path/to/xxx.pt --fp16
 
   # 固定 batch=1（部署常用）+ FP16

@@ -45,8 +45,8 @@
 
 ```bash
 python scripts/policy/export_pt_to_onnx.py \
-  src/drone_control/model/xxx.pt \
-  src/drone_control/model/xxx.onnx \
+  src/drone_controller/model/xxx.pt \
+  src/drone_controller/model/xxx.onnx \
   --drone-key drone_0 \
   --infer-dims \
   --activation elu \
@@ -58,8 +58,8 @@ python scripts/policy/export_pt_to_onnx.py \
 
 ```bash
 python scripts/policy/export_pt_to_onnx.py \
-  src/drone_control/model/xxx.pt \
-  src/drone_control/model/xxx.onnx \
+  src/drone_controller/model/xxx.pt \
+  src/drone_controller/model/xxx.onnx \
   --drone-key drone_0 \
   --in-dim 220 --out-dim 2 \
   --hidden "1024,1024,1024,512,512,512,256,256,256" \
@@ -119,7 +119,7 @@ python scripts/policy/export_pt_to_onnx.py \
 
 ```bash
 python scripts/policy/export_pt_to_trt.py \
-  src/drone_control/model/xxx.pt \
+  src/drone_controller/model/xxx.pt \
   --infer-dims --weights-only \
   --drone-key drone_0 --activation elu \
   --fp16 --workspace 4096 \
@@ -131,7 +131,7 @@ python scripts/policy/export_pt_to_trt.py \
 
 ```bash
 python scripts/policy/export_pt_to_trt.py \
-  src/drone_control/model/xxx.pt \
+  src/drone_controller/model/xxx.pt \
   --in-dim 220 --out-dim 2 \
   --hidden "1024,1024,1024,512,512,512,256,256,256" \
   --drone-key drone_0 --activation elu \
@@ -143,7 +143,7 @@ python scripts/policy/export_pt_to_trt.py \
 
 ```bash
 python scripts/policy/export_pt_to_trt.py \
-  src/drone_control/model/xxx.pt \
+  src/drone_controller/model/xxx.pt \
   --onnx out/model.onnx --engine out/model.engine \
   --trtexec /usr/src/tensorrt/bin/trtexec \
   --infer-dims

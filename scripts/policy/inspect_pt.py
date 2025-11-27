@@ -1,5 +1,3 @@
-#!/home/nv/SWARM-Physical/env_swarm/bin/python
-# -*- coding: utf-8 -*-
 """
 @file    inspect_pt.py
 @brief   批量/单个 .pt/.pth 文件结构打印工具

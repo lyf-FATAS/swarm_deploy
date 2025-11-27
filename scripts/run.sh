@@ -61,7 +61,7 @@ docker run -it --rm \
 # tmux send-keys -t "$SESSION:1.1" 'rosrun drone_observer drone_detector.py' C-m & sleep "$DELAY"
 
 # 3) 下：起自身控制节点
-# tmux send-keys -t "$SESSION:1.2" 'roslaunch drone_control drone_control.launch' C-m & sleep "$DELAY"
+# tmux send-keys -t "$SESSION:1.2" 'roslaunch drone_controller drone_controller.launch' C-m & sleep "$DELAY"
 
 # 回到窗口0左上并进入会话
 tmux select-window -t "$SESSION:0"

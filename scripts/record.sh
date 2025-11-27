@@ -6,5 +6,5 @@ rosbag record --tcpnodelay \
     /mavros/setpoint_raw/target_attitude \
     /imu_data_raw \
     /fusion_odometry/current_point_odom \
-    /drone_control/position_cmd \
+    /drone_controller/position_cmd \
     /debugPx4ctrl \

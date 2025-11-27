@@ -1,5 +1,3 @@
-#!/home/nv/SWARM-Physical/env_swarm/bin/python
-# -*- coding: utf-8 -*-
 """
 @file    export_pt_to_onnx.py
 @brief   从 PyTorch 检查点 (.pt/.pth) 导出 ONNX（仅导出 policy 分支的 MLP）
