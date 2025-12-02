@@ -1,6 +1,3 @@
-# 无人机策略控制节点（私有参数，等价于 ~param）
-# 话题名也放这里，便于一处改全局
-
 # 控制与约束
 infer_dt: 0.05             # 推理周期 [s]
 control_dt: 0.01           # 控制周期 [s]
@@ -17,14 +14,20 @@ obs_history_len: 10
 # 调试与推理
 print_debug: true
 warmup_iters: 200
-model_path: /home/nv/SWARM-Physical/src/drone_control/model/acc_8_12_ideal.engine
+model_path: /home/nv/Wss/swarm_deploy/src/drone_controller/model/acc_8_12_ideal.engine
 
 # 话题（可以按需改名）
-target_topic:  target_position       # geometry_msgs/Point
-velocity_topic: self_velocity        # geometry_msgs/Vector3
-others_topic:  other_drones_obs      # std_msgs/Float32MultiArray，长度=4*(drones_num-1)
+odom_topic: ""                            # 不再用 ekf，可留空
+others_topic: ""                          # 不再用点云，可留空
 
-accel_topic:   cmd_accel             # geometry_msgs/Accel （发布）
-vel_topic:     cmd_vel               # geometry_msgs/Twist（发布）
-pos_topic:     cmd_pos               # geometry_msgs/Point （发布）
+target_topic:  target_position       # geometry_msgs/Point
 action_topic:  policy_action         # std_msgs/Float32MultiArray（发布，原始动作）
+
+# 动捕数据
+self_mocap_topic: "/swarm_drone_0/pose"   # nav_msgs/Odometry（VRPN pose）
+other_mocap_topics:                       # 列表顺序对应 other_drones_obs_ 的槽位
+  - "/swarm_drone_1/pose"
+  - "/swarm_drone_2/pose"
+  - "/swarm_drone_3/pose"
+  - "/swarm_drone_4/pose"
+use_mocap_for_others: true                # 若仍要用点云，把它设为 false

@@ -1,16 +1,16 @@
 <launch>
   <!-- 可选参数 -->
   <!-- <arg name="ns"         default="drone1"/> -->
-  <arg name="ns"         default="drone_control"/>
+  <arg name="ns"         default="drone_controller"/>
   <arg name="node_name"  default="drone_control_node"/>
-  <arg name="config"     default="$(find drone_control)/config/drone_control.yaml"/>
+  <arg name="config"     default="$(find drone_controller)/config/drone_controller.yaml"/>
   <arg name="use_sim_time" default="false"/>
 
   <group ns="$(arg ns)">
     <param name="use_sim_time" value="$(arg use_sim_time)"/>
 
     <!-- 启动节点；把 YAML 加到该节点的私有命名空间 (~) -->
-    <node pkg="drone_control" type="drone_control_node" name="$(arg node_name)" output="screen">
+    <node pkg="drone_controller" type="drone_control_node" name="$(arg node_name)" output="screen">
       <rosparam command="load" file="$(arg config)"/>
 
       <!-- 如果想临时覆盖 YAML 里的某些参数，可以额外写 param：

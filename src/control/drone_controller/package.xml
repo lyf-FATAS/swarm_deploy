@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>drone_control</name>
+  <name>drone_controller</name>
   <version>0.1.0</version>
   <description>TensorRT runner demo for ROS1 on NVIDIA Jetson.</description>
 

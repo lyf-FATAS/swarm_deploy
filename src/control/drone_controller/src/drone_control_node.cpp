@@ -41,15 +41,44 @@ DroneControllerNode::DroneControllerNode(ros::NodeHandle& nh, ros::NodeHandle& p
 
     /* 话题（支持参数化） */
     std::string topic_target  = pnh.param<std::string>("target_topic",  "target_position");
-    // std::string topic_odom    = pnh.param<std::string>("odom_topic",    "/fusion_odometry/current_point_odom");
     std::string topic_odom    = pnh.param<std::string>("odom_topic",    "/ekf/ekf_odom");
     std::string topic_others  = pnh.param<std::string>("others_topic",  "other_drones_obs");
     std::string topic_control = pnh.param<std::string>("control_topic", "position_cmd");
     std::string topic_action  = pnh.param<std::string>("action_topic",  "policy_action");
 
     sub_target_  = nh.subscribe(topic_target, 10, &DroneControllerNode::onTarget, this);
-    sub_odom_    = nh.subscribe(topic_odom,   1,  &DroneControllerNode::onOdom,   this, ros::TransportHints().tcpNoDelay());
-    sub_others_  = nh.subscribe(topic_others, 1,  &DroneControllerNode::onOtherDrones, this);
+    if (!self_mocap_topic_.empty())
+    {
+        sub_self_mocap_ = nh.subscribe(self_mocap_topic_, 1, &DroneControllerNode::onSelfMocap, this, ros::TransportHints().tcpNoDelay());
+        ROS_INFO_STREAM("[drone_control_node] Use mocap for self pose: " << self_mocap_topic_);
+    }
+    else if (!topic_odom.empty())
+    {
+        sub_odom_    = nh.subscribe(topic_odom,   1,  &DroneControllerNode::onOdom,   this, ros::TransportHints().tcpNoDelay());
+        ROS_WARN_STREAM("[drone_control_node] self_mocap_topic empty, fallback to odom: " << topic_odom);
+    }
+
+    if (use_mocap_for_others_ && !other_mocap_topics_.empty())
+    {
+        sub_others_mocap_.resize(other_mocap_topics_.size());
+        const std::size_t sub_num = std::min(static_cast<std::size_t>(obstacles_num_), other_mocap_topics_.size());
+        for (std::size_t i = 0; i < sub_num; ++i)
+        {
+            sub_others_mocap_[i] = nh.subscribe<nav_msgs::Odometry>(
+                other_mocap_topics_[i], 1,
+                boost::bind(&DroneControllerNode::onOtherMocap, this, _1, static_cast<int>(i)));
+            ROS_INFO_STREAM("[drone_control_node] Use mocap for other[" << i << "]: " << other_mocap_topics_[i]);
+        }
+    }
+    else if (!topic_others.empty())
+    {
+        sub_others_  = nh.subscribe(topic_others, 1,  &DroneControllerNode::onOtherDrones, this);
+        ROS_INFO_STREAM("[drone_control_node] Use pointcloud for others: " << topic_others);
+    }
+    else
+    {
+        ROS_WARN("[drone_control_node] No others input configured (mocap or pointcloud).");
+    }
     sub_trigger_ = nh.subscribe("/traj_start_trigger", 10, &DroneControllerNode::onTrigger, this);
 
     pub_control_ = nh.advertise<quadrotor_msgs::PositionCommand>(topic_control, 10);
@@ -94,6 +123,9 @@ void DroneControllerNode::initParams(ros::NodeHandle& pnh)
     pnh.param("print_debug", print_debug_, print_debug_);
     pnh.param("warmup_iters", warmup_iters_, warmup_iters_);
     pnh.param<std::string>("model_path", model_path_, "");
+    pnh.param("use_mocap_for_others", use_mocap_for_others_, use_mocap_for_others_);
+    pnh.param<std::string>("self_mocap_topic", self_mocap_topic_, "/swarm_drone_0/pose");
+    pnh.getParam("other_mocap_topics", other_mocap_topics_);
 
     // 参数计算
     obstacles_num_    = drones_num_ - 1;
@@ -357,6 +389,29 @@ void DroneControllerNode::onOdom(const nav_msgs::OdometryPtr& msg)
     br_.sendTransform(t);
 }
 
+void DroneControllerNode::onSelfMocap(const nav_msgs::Odometry::ConstPtr& msg)
+{
+    std::lock_guard<std::mutex> lock(mtx_);
+    odom_msg_ = *msg;
+
+    position_[0] = static_cast<float>(msg->pose.pose.position.x);
+    position_[1] = static_cast<float>(msg->pose.pose.position.y);
+    velocity_[0] = static_cast<float>(msg->twist.twist.linear.x);
+    velocity_[1] = static_cast<float>(msg->twist.twist.linear.y);
+
+    geometry_msgs::TransformStamped t;
+    t.header.stamp = msg->header.stamp;
+    t.header.frame_id = msg->header.frame_id;
+    t.child_frame_id  = "base_link";
+
+    t.transform.translation.x = msg->pose.pose.position.x;
+    t.transform.translation.y = msg->pose.pose.position.y;
+    t.transform.translation.z = msg->pose.pose.position.z;
+    t.transform.rotation      = msg->pose.pose.orientation;
+
+    br_.sendTransform(t);
+}
+
 void DroneControllerNode::onOtherDrones(const sensor_msgs::PointCloud::ConstPtr& msg)
 {
     std::lock_guard<std::mutex> lock(mtx_);
@@ -390,6 +445,30 @@ void DroneControllerNode::onOtherDrones(const sensor_msgs::PointCloud::ConstPtr&
         other_drones_obs_[4*i + 2] = 0.;
         other_drones_obs_[4*i + 3] = static_cast<float>(false);
     }
+}
+
+void DroneControllerNode::onOtherMocap(const nav_msgs::Odometry::ConstPtr& msg, int idx)
+{
+    std::lock_guard<std::mutex> lock(mtx_);
+    if (idx < 0 || idx >= obstacles_num_)
+        return;
+
+    tf2::Quaternion q_self;
+    tf2::fromMsg(odom_msg_.pose.pose.orientation, q_self);
+    q_self.normalize();
+
+    tf2::Vector3 rel_world(
+        msg->pose.pose.position.x - odom_msg_.pose.pose.position.x,
+        msg->pose.pose.position.y - odom_msg_.pose.pose.position.y,
+        msg->pose.pose.position.z - odom_msg_.pose.pose.position.z
+    );
+
+    const tf2::Vector3 rel_body = tf2::quatRotate(q_self.inverse(), rel_world);
+
+    other_drones_obs_[4*idx + 0] = static_cast<float>(rel_body.x());
+    other_drones_obs_[4*idx + 1] = static_cast<float>(rel_body.y());
+    other_drones_obs_[4*idx + 2] = static_cast<float>(rel_body.z());
+    other_drones_obs_[4*idx + 3] = static_cast<float>(true);
 }
 
 void DroneControllerNode::onTrigger(const geometry_msgs::PoseStampedPtr& msg)

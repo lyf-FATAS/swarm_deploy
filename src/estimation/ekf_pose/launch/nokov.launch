@@ -2,7 +2,7 @@
     
     <node pkg="ekf" type="ekf" name="ekf" output="screen">
         <remap from="~imu" to="/mavros/imu/data"/>
-        <remap from="~bodyodometry" to="/vrpn_client_node/swarm_drone_0/pose"/> 
+        <remap from="~bodyodometry" to="/vrpn_client_node/swarm_drone_$(env DRONE_ID)/pose"/> 
         <remap from="~ekf_odom" to="/ekf/ekf_odom"/>
 
         <!-- parms -->

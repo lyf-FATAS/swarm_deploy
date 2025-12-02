@@ -38,8 +38,7 @@ int main()
 
     /* 配置你的输入形状与模型路径 -----------------------------------------------------------------------------------*/
     std::vector<int> input_shape = {220};                     // 样本维（不含 batch）
-    std::string model_path = "/home/nv/SWARM-Physical/src/drone_control/model/acc_8_3_rand_b1_32.engine";  // .engine 路径
-    // std::string model_path = "/home/nv/SWARM-Physical/src/drone_control/model/acc_8_3_rand.engine";  // .engine 路径
+    std::string model_path = "/home/nv/Wss/swarm_deploy/src/control/drone_controller/model/acc_8_3_rand_fp32_b1.engine";  // .engine 路径
 
     /* 配置要测试的批大小（若引擎固定为 1，会自动回退并提示） ------------------------------------------------------*/
     int desired_batch = 32;  // ← 想测多少填多少：1/2/4/8/16...

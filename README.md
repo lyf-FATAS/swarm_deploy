@@ -41,3 +41,5 @@ When using NVIDIA Jetson, there are a couple of best practices to follow in orde
    pip uninstall empy
    pip install empy==3.3.4
    ```
+
+2. Runtime crash when `seeker` links against the wrong OpenCV: ensure the workspace’s custom `vision_opencv` overrides the system version.

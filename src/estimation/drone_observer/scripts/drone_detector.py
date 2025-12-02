@@ -93,7 +93,7 @@ class YoloBatchDetector:
             '/yolo/left/right/detected_image'
         ])
         self.publishers = [rospy.Publisher(t, Image, queue_size=10) for t in self.detected_topics]
-        self.pub_obs_cloud = rospy.Publisher("/drone_control/other_drones_obs", PointCloud, queue_size=10)  # 新增：给其他节点
+        self.pub_obs_cloud = rospy.Publisher("/drone_controller/other_drones_obs", PointCloud, queue_size=10)  # 新增：给其他节点
 
         # 多路摄像头话题
         self.image_topics = rospy.get_param('~image_topics', [

@@ -59,6 +59,8 @@ private:
     void controlCallback(const ros::TimerEvent&);
     void onTarget(const geometry_msgs::PointConstPtr& msg);
     void onOdom(const nav_msgs::OdometryPtr& msg);
+    void onSelfMocap(const nav_msgs::Odometry::ConstPtr& msg);
+    void onOtherMocap(const nav_msgs::Odometry::ConstPtr& msg, int idx);
     void onOtherDrones(const sensor_msgs::PointCloud::ConstPtr& msg);
     void onTrigger(const geometry_msgs::PoseStampedPtr& msg);
 
@@ -123,7 +125,9 @@ private:
     /* ROS */
     ros::Subscriber sub_target_;
     ros::Subscriber sub_odom_;
+    ros::Subscriber sub_self_mocap_;
     ros::Subscriber sub_others_;
+    std::vector<ros::Subscriber> sub_others_mocap_;
     ros::Subscriber sub_trigger_;
     ros::Publisher  pub_control_;
     ros::Publisher  pub_action_;                    // 可选：发布网络原始动作
@@ -137,6 +141,9 @@ private:
     bool  print_debug_   = true;
     int   warmup_iters_  = 200;
     std::string model_path_;
+    std::string self_mocap_topic_;
+    std::vector<std::string> other_mocap_topics_;
+    bool use_mocap_for_others_{true};
 
     /* 线程同步 */
     std::mutex mtx_;

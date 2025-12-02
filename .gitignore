@@ -1,15 +1,14 @@
 .vscode/
 
+# ROS
 build/
 devel/
 .catkin_workspace
 src/CMakeLists.txt
-
-env_swarm/
-
-converted_config/
-
 *.bag
+
+# Python venv
+env_swarm/
 
 # VIO configs
 docker/docker_diff_vio/df_visual_frontend/config/f4_v2/cam0_fisheye.yaml
