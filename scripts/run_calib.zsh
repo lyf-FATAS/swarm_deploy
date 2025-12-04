@@ -1,14 +1,17 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
+# Stored sudo password for automated commands (plaintext as requested)
+SUDO_PASSWORD="${SUDO_PASSWORD:-nv}"
+
 # Optional: session name (default: calib)
 SESSION="calib"
 
 # Optional: seeker img_pub_intervals override (empty = launch default)
-IMG_PUB_INTERVALS=""
+IMG_PUB_INTERVALS="1"
 
 # Optional: use_image_transport override (empty = launch default)
-USE_IMAGE_TRANSPORT=""
+USE_IMAGE_TRANSPORT="true"
 
 usage() {
   cat <<'EOF'
@@ -82,6 +85,39 @@ if ! command -v tmux >/dev/null 2>&1; then
   exit 1
 fi
 
+# Wrapper to run commands with sudo if needed; supports SUDO_PASSWORD env var
+run_as_root() {
+  if [[ $EUID -eq 0 ]]; then
+    "$@"
+  elif [[ -n "${SUDO_PASSWORD:-}" ]]; then
+    printf '%s\n' "$SUDO_PASSWORD" | sudo -S "$@"
+  else
+    sudo "$@"
+  fi
+}
+
+# Ensure Jetson runs at max power/clocks before launching anything
+set_power_mode_max() {
+  if command -v nvpmodel >/dev/null 2>&1; then
+    echo "Setting Jetson power mode to MAX (nvpmodel -m 0)..."
+    run_as_root nvpmodel -m 0
+  else
+    echo "nvpmodel not found; skipping power mode change" >&2
+  fi
+}
+
+start_jetson_clocks() {
+  if command -v jetson_clocks >/dev/null 2>&1; then
+    echo "Enabling jetson_clocks..."
+    run_as_root jetson_clocks
+  else
+    echo "jetson_clocks not found; skipping" >&2
+  fi
+}
+
+set_power_mode_max
+start_jetson_clocks
+
 # Helper: run a command in a specific pane with a short pause
 run() {
   local pane="$1"; shift
@@ -98,6 +134,7 @@ fi
 if [[ -n "$USE_IMAGE_TRANSPORT" ]]; then
   SEEKER_EXTRA_ARGS+=" use_image_transport:=$USE_IMAGE_TRANSPORT"
 fi
+SEEKER_EXTRA_ARGS+=" undistort_color:=false undistort_gray:=false"
 
 # Kill existing session with the same name for a clean start
 if tmux has-session -t "$SESSION" 2>/dev/null; then

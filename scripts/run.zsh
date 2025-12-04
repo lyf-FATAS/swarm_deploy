@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
+# Stored sudo password for automated commands (plaintext as requested)
+SUDO_PASSWORD="${SUDO_PASSWORD:-nv}"
+
 # Optional: session name (default: swarm)
 SESSION="swarm"
 
@@ -82,6 +85,39 @@ if ! command -v tmux >/dev/null 2>&1; then
   exit 1
 fi
 
+# Wrapper to run commands with sudo if needed; supports SUDO_PASSWORD env var
+run_as_root() {
+  if [[ $EUID -eq 0 ]]; then
+    "$@"
+  elif [[ -n "${SUDO_PASSWORD:-}" ]]; then
+    printf '%s\n' "$SUDO_PASSWORD" | sudo -S "$@"
+  else
+    sudo "$@"
+  fi
+}
+
+# Ensure Jetson runs at max power/clocks before launching anything
+set_power_mode_max() {
+  if command -v nvpmodel >/dev/null 2>&1; then
+    echo "Setting Jetson power mode to MAX (nvpmodel -m 0)..."
+    run_as_root nvpmodel -m 0
+  else
+    echo "nvpmodel not found; skipping power mode change" >&2
+  fi
+}
+
+start_jetson_clocks() {
+  if command -v jetson_clocks >/dev/null 2>&1; then
+    echo "Enabling jetson_clocks..."
+    run_as_root jetson_clocks
+  else
+    echo "jetson_clocks not found; skipping" >&2
+  fi
+}
+
+set_power_mode_max
+start_jetson_clocks
+
 # Helper: run a command in a specific pane with a short pause
 run() {
   local pane="$1"; shift
@@ -131,7 +167,7 @@ run 0.2 'roslaunch ekf nokov.launch'
 run 0.3 'roslaunch px4ctrl run_ctrl.launch'
 
 # 5) bottom-right: quad camera
-run 0.4 "roslaunch seeker 3undistort_nodelet.launch${SEEKER_EXTRA_ARGS}"
+run 0.4 "roslaunch seeker 1seeker_nodelet.launch${SEEKER_EXTRA_ARGS}"
 
 #######################
 # Window 1: VIO / observers / control
